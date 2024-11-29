@@ -6,11 +6,12 @@ import pandas as pd
 import numpy as np
 
 # Dates to get stock data
-start_date = "2020-01-01"
-end_date = "2023-06-15"
+start_date = "2024-09-01"
+end_date = "2024-11-28"
 
 # Fetch Tesla stock data
-tesla_data = yf.download("TSLA", start=start_date, end=end_date)
+# tesla_data = yf.download("TSLA", start=start_date, end=end_date)
+tesla_data = pd.read_csv("examples/data/Tesla_stock.csv", index_col=0, parse_dates=True)
 tesla_weekly_data = tesla_data.resample("W").agg(
         {"Open": "first", "High": "max", "Low": "min", "Close": "last", "Volume": "sum"}
     ).dropna()
